@@ -39,6 +39,7 @@ almacenamiento y reduce la exposición directa del origen.
 ### Diagrama de arquitectura
 
 ![Arquitectura de AWS Secure Web Portfolio](docs/aws-architecture.png)
+
 ## 4. Servicios y tecnologías
 
 - **Amazon S3:** almacenamiento de los archivos estáticos del sitio.
