@@ -26,12 +26,19 @@ El proyecto demuestra la aplicación de controles de acceso, protección del ori
 
 **Flujo de acceso:**
 
-Visitante → HTTPS/TLS → Amazon CloudFront → Origin Access Control (OAC) → Amazon S3 privado.
+Visitante → HTTPS/TLS → Amazon CloudFront → OAC → Bucket privado de Amazon S3.
 
-Amazon CloudFront recibe las solicitudes de los visitantes y distribuye el contenido del sitio. OAC permite que la distribución autorizada acceda al origen S3 mediante los permisos configurados en la política del bucket.
+Amazon CloudFront distribuye el contenido del sitio web y utiliza
+Origin Access Control (OAC) para autorizar las solicitudes al
+origen de Amazon S3. El bucket permanece privado, sin necesidad
+de habilitar el acceso público a sus objetos.
 
-El bucket se mantiene privado y no requiere habilitar el acceso público para servir el sitio a través de CloudFront.
+Esta arquitectura separa la distribución del contenido de su
+almacenamiento y reduce la exposición directa del origen.
 
+### Diagrama de arquitectura
+
+![Arquitectura de AWS Secure Web Portfolio](docs/aws-architecture.png)
 ## 4. Servicios y tecnologías
 
 - **Amazon S3:** almacenamiento de los archivos estáticos del sitio.
