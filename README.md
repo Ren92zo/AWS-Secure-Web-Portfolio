@@ -38,7 +38,7 @@ almacenamiento y reduce la exposición directa del origen.
 
 ### Diagrama de arquitectura
 
-![Arquitectura de AWS Secure Web Portfolio](docs/aws-architecture.png)
+![Arquitectura de AWS Secure Web Portfolio](aws-architecture.png)
 
 ## 4. Servicios y tecnologías
 
