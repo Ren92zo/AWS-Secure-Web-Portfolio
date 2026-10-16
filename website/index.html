@@ -4,9 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Portafolio profesional de un estudiante de Ciberseguridad, con proyectos prácticos de seguridad cloud y AWS.">
 
-    <title>Mi Portafolio | Ciberseguridad y AWS</title>
+    <meta name="description"
+          content="Portafolio de ciberseguridad con proyectos prácticos de AWS, seguridad cloud, control de acceso y protección de recursos.">
+
+    <meta name="theme-color" content="#0b1120">
+
+    <title>Portafolio de Ciberseguridad | AWS y Seguridad Cloud</title>
 
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -14,7 +18,9 @@
 
     <header class="header">
         <nav class="navbar container" aria-label="Navegación principal">
-            <a href="#inicio" class="logo">Cyber<span>Security</span></a>
+            <a href="#inicio" class="logo">
+                Cyber<span>Security</span>
+            </a>
 
             <ul class="nav-links">
                 <li><a href="#sobre-mi">Sobre mí</a></li>
@@ -30,14 +36,15 @@
             <div class="container hero-content">
                 <p class="eyebrow">ESTUDIANTE DE CIBERSEGURIDAD</p>
 
-                <h1>Construyendo un futuro en la
+                <h1>
+                    Construyendo un futuro en la
                     <span>seguridad digital</span>
                 </h1>
 
                 <p class="hero-description">
-                    Exploro la ciberseguridad, la protección de infraestructuras
-                    y las tecnologías cloud mediante proyectos prácticos
-                    y aprendizaje continuo.
+                    Desarrollo conocimientos en ciberseguridad y seguridad
+                    cloud mediante laboratorios prácticos, implementación
+                    de controles y documentación técnica.
                 </p>
 
                 <a href="#proyectos" class="button">
@@ -51,15 +58,15 @@
             <h2>Sobre mí</h2>
 
             <p>
-                Soy estudiante de Ciberseguridad y estoy desarrollando
-                mis habilidades en seguridad informática, infraestructura
-                cloud y buenas prácticas de protección de datos.
+                Soy estudiante de Ciberseguridad y estoy fortaleciendo
+                mis conocimientos en seguridad informática, infraestructura
+                cloud, control de acceso y protección de datos.
             </p>
 
             <p>
-                Mi objetivo es aplicar los conocimientos adquiridos en
-                laboratorios prácticos, documentar cada implementación
-                y aprender a diseñar soluciones seguras y confiables.
+                Me interesa aplicar buenas prácticas de seguridad en
+                entornos reales de laboratorio, validar las configuraciones
+                implementadas y documentar los resultados de forma clara.
             </p>
         </section>
 
@@ -71,22 +78,34 @@
                 <div class="skills-grid">
                     <article class="skill-card">
                         <h3>Ciberseguridad</h3>
-                        <p>Principio de mínimo privilegio y controles de acceso.</p>
+                        <p>
+                            Principio de mínimo privilegio, control de acceso
+                            y buenas prácticas de protección.
+                        </p>
                     </article>
 
                     <article class="skill-card">
                         <h3>Amazon Web Services</h3>
-                        <p>Fundamentos de AWS y arquitectura cloud segura.</p>
+                        <p>
+                            Amazon S3, Amazon CloudFront y fundamentos
+                            de arquitectura cloud.
+                        </p>
                     </article>
 
                     <article class="skill-card">
                         <h3>Seguridad cloud</h3>
-                        <p>Protección de recursos, permisos y comunicaciones.</p>
+                        <p>
+                            Buckets privados, Origin Access Control (OAC)
+                            y validación de permisos de acceso.
+                        </p>
                     </article>
 
                     <article class="skill-card">
                         <h3>Desarrollo web</h3>
-                        <p>HTML, CSS y publicación de sitios estáticos.</p>
+                        <p>
+                            HTML, CSS y diseño de sitios web estáticos
+                            adaptables a distintos dispositivos.
+                        </p>
                     </article>
                 </div>
             </div>
@@ -98,16 +117,41 @@
 
             <article class="project-card">
                 <p class="project-tag">AWS · CLOUD SECURITY</p>
+
                 <h3>AWS Secure Web Portfolio</h3>
 
                 <p>
-                    Proyecto en desarrollo para desplegar un sitio web
-                    estático utilizando Amazon S3 y Amazon CloudFront,
-                    con un bucket privado, Origin Access Control (OAC)
-                    y acceso mediante HTTPS.
+                    Implementación de un sitio web estático utilizando
+                    Amazon S3 como origen privado y Amazon CloudFront
+                    para distribuir el contenido mediante HTTPS.
                 </p>
 
-                <p class="project-status">Estado: En desarrollo</p>
+                <p>
+                    Se utiliza Origin Access Control (OAC) para autorizar
+                    el acceso de CloudFront al bucket y mantener restringido
+                    el acceso público directo a los objetos de S3.
+                </p>
+
+                <ul>
+                    <li>Bloqueo de acceso público en Amazon S3.</li>
+                    <li>Acceso al sitio mediante HTTPS.</li>
+                    <li>Validación de acceso directo a S3: 403 AccessDenied.</li>
+                    <li>Revisión de permisos y configuración de acceso.</li>
+                </ul>
+
+                <p class="project-status">
+                    Estado: implementación y validación inicial realizadas.
+                </p>
+
+                <a
+                    href="https://github.com/Ren92zo/AWS-Secure-Web-Portfolio"
+                    class="button"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Consultar el código y la documentación del proyecto en GitHub"
+                >
+                    Ver proyecto en GitHub
+                </a>
             </article>
         </section>
 
@@ -117,15 +161,24 @@
                 <h2>Conectemos</h2>
 
                 <p>
-                    Estoy interesado en seguir aprendiendo y participar
-                    en oportunidades relacionadas con la ciberseguridad
-                    y la seguridad en la nube.
+                    Estoy interesado en continuar desarrollándome
+                    profesionalmente y participar en oportunidades
+                    relacionadas con la ciberseguridad y la seguridad cloud.
                 </p>
 
-                <!-- Añade aquí tus enlaces profesionales cuando estés listo. -->
-                <p class="contact-note">
-                    Próximamente: enlaces profesionales y de contacto.
+                <p>
+                    Puedes consultar mis proyectos y documentación
+                    técnica en mi perfil de GitHub.
                 </p>
+
+                <a
+                    href="https://github.com/Ren92zo"
+                    class="button"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Visitar mi GitHub
+                </a>
             </div>
         </section>
     </main>
@@ -133,9 +186,11 @@
     <footer class="footer">
         <div class="container">
             <p>
-                © 2026 · Mi Portafolio de Ciberseguridad
+                © 2026 · Portafolio de Ciberseguridad
             </p>
-            <p>Desarrollado como proyecto práctico de AWS.</p>
+            <p>
+                Proyecto práctico de seguridad cloud con AWS.
+            </p>
         </div>
     </footer>
 
