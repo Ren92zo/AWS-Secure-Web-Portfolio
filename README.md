@@ -2,8 +2,6 @@
 
 Portafolio web estático alojado en AWS con **Amazon S3 + Amazon CloudFront**, usando un origen privado protegido con **Origin Access Control (OAC)**, HTTPS obligatorio y buenas prácticas de seguridad cloud.
 
-**Sitio web:** <https://d1aao9ojsg10jv.cloudfront.net/>
-
 ---
 
 ## 1. Descripción del proyecto
