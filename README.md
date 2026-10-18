@@ -54,12 +54,12 @@ Amazon CloudFront distribuye el contenido y utiliza Origin Access Control (OAC) 
 
 | Control | Implementación | Evidencia |
 |---|---|---|
-| Bucket privado | Block Public Access activado en sus cuatro opciones. | [Evidencia 1](#evidence-1--block-public-access-activado) |
-| Mínimo privilegio | La política solo permite `s3:GetObject`, únicamente al servicio `cloudfront.amazonaws.com` y solo desde una distribución concreta (`AWS:SourceArn`). | [Evidencia 2](#evidence-2--política-del-bucket) |
-| Protección del origen | CloudFront accede al bucket mediante OAC; no se usa acceso público ni identidades heredadas (OAI). | [Evidencia 3](#evidence-3--origen-de-cloudfront-con-oac) |
-| Cifrado en tránsito | Política de visualizador "Redirect HTTP to HTTPS". | [Evidencia 4](#evidence-4--redirección-de-http-a-https) · [Validación 6.3](#63-redirección-de-http-a-https) |
+| Bucket privado | Block Public Access activado en sus cuatro opciones. | [Evidence 1](#evidence-1--block-public-access-activado) |
+| Mínimo privilegio | La política solo permite `s3:GetObject`, únicamente al servicio `cloudfront.amazonaws.com` y solo desde una distribución concreta (`AWS:SourceArn`). | [Evidence 2](#evidence-2--política-del-bucket) |
+| Protección del origen | CloudFront accede al bucket mediante OAC; no se usa acceso público ni identidades heredadas (OAI). | [Evidence 3](#evidence-3--origen-de-cloudfront-con-oac) |
+| Cifrado en tránsito | Política de visualizador "Redirect HTTP to HTTPS". | [Evidence 4](#evidence-4--redirección-de-http-a-https) · [Validación 6.3](#63-redirección-de-http-a-https) |
 | Cifrado en reposo | Los objetos se almacenan cifrados con AES-256 (cabecera `x-amz-server-side-encryption`). | [Validación 6.1](#61-disponibilidad-del-sitio-a-través-de-cloudfront) |
-| Acceso directo denegado | Las solicitudes directas al objeto en S3 devuelven `403`. | [Evidencia 5](#evidence-5--acceso-directo-a-s3-denegado) · [Validación 6.2](#62-acceso-directo-a-s3-denegado) |
+| Acceso directo denegado | Las solicitudes directas al objeto en S3 devuelven `403`. | [Evidence 5](#evidence-5--acceso-directo-a-s3-denegado) · [Validación 6.2](#62-acceso-directo-a-s3-denegado) |
 | Higiene del repositorio | Sin credenciales, claves ni archivos de facturación; identificadores de cuenta y de petición redactados. | [Sección 9](#9-privacidad-del-repositorio) |
 
 ### Política del bucket
