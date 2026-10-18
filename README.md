@@ -54,12 +54,12 @@ Amazon CloudFront distribuye el contenido y utiliza Origin Access Control (OAC) 
 
 | Control | Implementación | Evidencia |
 |---|---|---|
-| Bucket privado | Block Public Access activado en sus cuatro opciones. | [Evidencia 1](#evidencia-1--block-public-access-activado) |
-| Mínimo privilegio | La política solo permite `s3:GetObject`, únicamente al servicio `cloudfront.amazonaws.com` y solo desde una distribución concreta (`AWS:SourceArn`). | [Evidencia 2](#evidencia-2--política-del-bucket) |
-| Protección del origen | CloudFront accede al bucket mediante OAC; no se usa acceso público ni identidades heredadas (OAI). | [Evidencia 3](#evidencia-3--origen-de-cloudfront-con-oac) |
-| Cifrado en tránsito | Política de visualizador "Redirect HTTP to HTTPS". | [Evidencia 4](#evidencia-4--redirección-de-http-a-https) · [Validación 6.3](#63-redirección-de-http-a-https) |
+| Bucket privado | Block Public Access activado en sus cuatro opciones. | [Evidencia 1](#evidence-1--block-public-access-activado) |
+| Mínimo privilegio | La política solo permite `s3:GetObject`, únicamente al servicio `cloudfront.amazonaws.com` y solo desde una distribución concreta (`AWS:SourceArn`). | [Evidencia 2](#evidence-2--política-del-bucket) |
+| Protección del origen | CloudFront accede al bucket mediante OAC; no se usa acceso público ni identidades heredadas (OAI). | [Evidencia 3](#evidence-3--origen-de-cloudfront-con-oac) |
+| Cifrado en tránsito | Política de visualizador "Redirect HTTP to HTTPS". | [Evidencia 4](#evidence-4--redirección-de-http-a-https) · [Validación 6.3](#63-redirección-de-http-a-https) |
 | Cifrado en reposo | Los objetos se almacenan cifrados con AES-256 (cabecera `x-amz-server-side-encryption`). | [Validación 6.1](#61-disponibilidad-del-sitio-a-través-de-cloudfront) |
-| Acceso directo denegado | Las solicitudes directas al objeto en S3 devuelven `403`. | [Evidencia 5](#evidencia-5--acceso-directo-a-s3-denegado) · [Validación 6.2](#62-acceso-directo-a-s3-denegado) |
+| Acceso directo denegado | Las solicitudes directas al objeto en S3 devuelven `403`. | [Evidencia 5](#evidence-5--acceso-directo-a-s3-denegado) · [Validación 6.2](#62-acceso-directo-a-s3-denegado) |
 | Higiene del repositorio | Sin credenciales, claves ni archivos de facturación; identificadores de cuenta y de petición redactados. | [Sección 9](#9-privacidad-del-repositorio) |
 
 ### Política del bucket
@@ -166,49 +166,49 @@ Las capturas de la consola de AWS fueron revisadas y, cuando fue necesario, reda
 
 ### Evidencia 1 · Block Public Access activado
 
-![Block Public Access activado](docs/evidencias/01_block_public_access.png)
+![Block Public Access activado](docs/evidence/01_block_public_access.png)
 
 El bucket tiene activadas las cuatro opciones de *Block Public Access*, por lo que ninguna ACL ni política pública puede exponer sus objetos.
 
 ### Evidencia 2 · Política del bucket
 
-![Política del bucket](docs/evidencias/02_bucket_policy_redactado.png)
+![Política del bucket](docs/evidence/02_bucket_policy_redactado.png)
 
 La política concede `s3:GetObject` solo al servicio de CloudFront, condicionado a una distribución concreta. AWS confirma en la consola que el acceso público sigue bloqueado.
 
 ### Evidencia 3 · Origen de CloudFront con OAC
 
-![Origen de CloudFront con OAC](docs/evidencias/05_cloudfront_origin_oac_redactado.png)
+![Origen de CloudFront con OAC](docs/evidence/05_cloudfront_origin_oac_redactado.png)
 
 El origen S3 está configurado con *Origin access control settings (recommended)*, y no con acceso público ni con identidades heredadas (OAI).
 
 ### Evidencia 4 · Redirección de HTTP a HTTPS
 
-![Redirección de HTTP a HTTPS](docs/evidencias/06_cloudfront_redirect_https_redactado.png)
+![Redirección de HTTP a HTTPS](docs/evidence/06_cloudfront_redirect_https_redactado.png)
 
 El comportamiento por defecto usa la política de visualizador *Redirect HTTP to HTTPS*. Su efecto real se comprueba en la [validación 6.3](#63-redirección-de-http-a-https).
 
 ### Evidencia 5 · Acceso directo a S3 denegado
 
-![Acceso directo a S3 denegado](docs/evidencias/03_s3_acceso_directo_403_redactado.png)
+![Acceso directo a S3 denegado](docs/evidence/03_s3_acceso_directo_403_redactado.png)
 
 Al abrir directamente la URL del objeto en S3, el navegador muestra `AccessDenied`. Confirma que el origen no es accesible sin pasar por CloudFront.
 
 ### Evidencia 6 · Sitio funcionando a través de CloudFront
 
-![Sitio servido por CloudFront](docs/evidencias/04_sitio_cloudfront_redactado.png)
+![Sitio servido por CloudFront](docs/evidence/04_sitio_cloudfront_redactado.png)
 
 El mismo contenido que S3 deniega de forma directa se sirve correctamente a través del dominio de CloudFront.
 
 ### Evidencia 7 · Contenido del bucket
 
-![Objetos del bucket](docs/evidencias/07_bucket_objetos.png)
+![Objetos del bucket](docs/evidence/07_bucket_objetos.png)
 
 El bucket contiene únicamente los dos archivos del sitio: `index.html` y `styles.css`.
 
 ### Evidencia 8 · Objeto raíz por defecto
 
-![Default root object](docs/evidencias/08_default_root_object.png)
+![Default root object](docs/evidence/08_default_root_object.png)
 
 CloudFront devuelve `index.html` cuando se solicita la raíz (`/`) del dominio, ya que el endpoint REST de S3, que es el que usa este origen, no resuelve documentos de índice por sí solo.
 
