@@ -54,13 +54,13 @@ Amazon CloudFront distribuye el contenido y utiliza Origin Access Control (OAC) 
 
 | Control | Implementación | Evidencia |
 |---|---|---|
-| Bucket privado | Block Public Access activado en sus cuatro opciones. | [Evidence 1](#evidence-1--block-public-access-activado) |
-| Mínimo privilegio | La política solo permite `s3:GetObject`, únicamente al servicio `cloudfront.amazonaws.com` y solo desde una distribución concreta (`AWS:SourceArn`). | [Evidence 2](#evidence-2--política-del-bucket) |
-| Protección del origen | CloudFront accede al bucket mediante OAC; no se usa acceso público ni identidades heredadas (OAI). | [Evidence 3](#evidence-3--origen-de-cloudfront-con-oac) |
-| Cifrado en tránsito | Política de visualizador "Redirect HTTP to HTTPS". | [Evidence 4](#evidence-4--redirección-de-http-a-https) · [Validación 6.3](#63-redirección-de-http-a-https) |
-| Cifrado en reposo | Los objetos se almacenan cifrados con AES-256 (cabecera `x-amz-server-side-encryption`). | [Validación 6.1](#61-disponibilidad-del-sitio-a-través-de-cloudfront) |
-| Acceso directo denegado | Las solicitudes directas al objeto en S3 devuelven `403`. | [Evidence 5](#evidence-5--acceso-directo-a-s3-denegado) · [Validación 6.2](#62-acceso-directo-a-s3-denegado) |
-| Higiene del repositorio | Sin credenciales, claves ni archivos de facturación; identificadores de cuenta y de petición redactados. | [Sección 9](#9-privacidad-del-repositorio) |
+| Bucket privado | Block Public Access activado en sus cuatro opciones. | [Evidencia 1](#evidencia-1) |
+| Mínimo privilegio | La política solo permite `s3:GetObject`, únicamente al servicio `cloudfront.amazonaws.com` y solo desde una distribución concreta (`AWS:SourceArn`). | [Evidencia 2](#evidencia-2) |
+| Protección del origen | CloudFront accede al bucket mediante OAC; no se usa acceso público ni identidades heredadas (OAI). | [Evidencia 3](#evidencia-3) |
+| Cifrado en tránsito | Política de visualizador "Redirect HTTP to HTTPS". | [Evidencia 4](#evidencia-4) · [Validación 6.3](#validacion-63) |
+| Cifrado en reposo | Los objetos se almacenan cifrados con AES-256 (cabecera `x-amz-server-side-encryption`). | [Validación 6.1](#validacion-61) |
+| Acceso directo denegado | Las solicitudes directas al objeto en S3 devuelven `403`. | [Evidencia 5](#evidencia-5) · [Validación 6.2](#validacion-62) |
+| Higiene del repositorio | Sin credenciales, claves ni archivos de facturación; identificadores de cuenta y de petición redactados. | [Sección 9](#privacidad) |
 
 ### Política del bucket
 
@@ -95,6 +95,8 @@ La condición `AWS:SourceArn` es la que impide que otra distribución de CloudFr
 
 Las pruebas se ejecutaron con `curl.exe -I` desde PowerShell. Los identificadores de petición (`X-Amz-Cf-Id`, `x-amz-request-id`, `x-amz-id-2`) y el identificador de la cabecera `Via` fueron reemplazados por `<redactado>`.
 
+<a id="validacion-61"></a>
+
 ### 6.1. Disponibilidad del sitio a través de CloudFront
 
 ```
@@ -118,6 +120,8 @@ Age: 13
 
 **Resultado:** el sitio responde `200 OK` a través de CloudFront (`X-Cache: Hit from cloudfront`). La cabecera `x-amz-server-side-encryption: AES256` confirma que el objeto está cifrado en reposo.
 
+<a id="validacion-62"></a>
+
 ### 6.2. Acceso directo a S3 denegado
 
 ```
@@ -132,6 +136,8 @@ Date: Sun, 18 Oct 2026 03:05:23 GMT
 ```
 
 **Resultado:** el mismo archivo que CloudFront sirve con `200` devuelve `403 Forbidden` si se solicita directamente a S3. El origen es privado y solo es accesible a través de la distribución autorizada.
+
+<a id="validacion-63"></a>
 
 ### 6.3. Redirección de HTTP a HTTPS
 
@@ -154,15 +160,19 @@ X-Amz-Cf-Id: <redactado>
 
 ### 6.4. Revisión de los controles
 
-Se revisaron en la consola de AWS el bloqueo de acceso público del bucket, la política que autoriza a CloudFront y la configuración de OAC en el origen. Las capturas están en la sección de [Evidencias](#7-evidencias).
+Se revisaron en la consola de AWS el bloqueo de acceso público del bucket, la política que autoriza a CloudFront y la configuración de OAC en el origen. Las capturas están en la sección de [Evidencias](#evidencias).
 
 ### 6.5. Revisión de costos
 
 Se revisó la información de facturación disponible en AWS para supervisar el consumo asociado al proyecto. Los cargos pueden variar según las solicitudes, la transferencia de datos y el almacenamiento, y dependen de las condiciones vigentes de la cuenta.
 
+<a id="evidencias"></a>
+
 ## 7. Evidencias
 
-Las capturas de la consola de AWS fueron revisadas y, cuando fue necesario, redactadas con recuadros sólidos antes de publicarse (ver [sección 9](#9-privacidad-del-repositorio)).
+Las capturas de la consola de AWS fueron revisadas y, cuando fue necesario, redactadas con recuadros sólidos antes de publicarse (ver [sección 9](#privacidad)).
+
+<a id="evidencia-1"></a>
 
 ### Evidencia 1 · Block Public Access activado
 
@@ -170,11 +180,15 @@ Las capturas de la consola de AWS fueron revisadas y, cuando fue necesario, reda
 
 El bucket tiene activadas las cuatro opciones de *Block Public Access*, por lo que ninguna ACL ni política pública puede exponer sus objetos.
 
+<a id="evidencia-2"></a>
+
 ### Evidencia 2 · Política del bucket
 
 ![Política del bucket](docs/evidence/02_bucket_policy_redactado.png)
 
 La política concede `s3:GetObject` solo al servicio de CloudFront, condicionado a una distribución concreta. AWS confirma en la consola que el acceso público sigue bloqueado.
+
+<a id="evidencia-3"></a>
 
 ### Evidencia 3 · Origen de CloudFront con OAC
 
@@ -182,11 +196,15 @@ La política concede `s3:GetObject` solo al servicio de CloudFront, condicionado
 
 El origen S3 está configurado con *Origin access control settings (recommended)*, y no con acceso público ni con identidades heredadas (OAI).
 
+<a id="evidencia-4"></a>
+
 ### Evidencia 4 · Redirección de HTTP a HTTPS
 
 ![Redirección de HTTP a HTTPS](docs/evidence/06_cloudfront_redirect_https_redactado.png)
 
-El comportamiento por defecto usa la política de visualizador *Redirect HTTP to HTTPS*. Su efecto real se comprueba en la [validación 6.3](#63-redirección-de-http-a-https).
+El comportamiento por defecto usa la política de visualizador *Redirect HTTP to HTTPS*. Su efecto real se comprueba en la [validación 6.3](#validacion-63).
+
+<a id="evidencia-5"></a>
 
 ### Evidencia 5 · Acceso directo a S3 denegado
 
@@ -223,6 +241,8 @@ La supervisión de costos forma parte del mantenimiento responsable de los recur
 - Priorizar servicios y configuraciones sin costo adicional para el proyecto.
 
 La disponibilidad de niveles gratuitos y los costos aplicables dependen del servicio, la región y las condiciones vigentes de la cuenta.
+
+<a id="privacidad"></a>
 
 ## 9. Privacidad del repositorio
 
